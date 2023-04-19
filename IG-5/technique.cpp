@@ -42,6 +42,8 @@ const char* ShaderType2ShaderName(GLuint Type)
 
     return NULL;
 }
+
+
 Technique::Technique()
 {
     m_shaderProg = 0;
@@ -111,7 +113,7 @@ bool Technique::AddShader(GLenum ShaderType, const char* pShaderText)
 
     glAttachShader(m_shaderProg, ShaderObj);
 
-    return true;
+    return GLCheckError();
 }
 
 
@@ -147,7 +149,7 @@ bool Technique::Finalize()
 
     m_shaderObjList.clear();
 
-    return true;
+    return GLCheckError();
 }
 
 
@@ -159,10 +161,9 @@ void Technique::Enable()
 
 GLint Technique::GetUniformLocation(const char* pUniformName)
 {
-    GLint Location = glGetUniformLocation(m_shaderProg, pUniformName);
+    GLuint Location = glGetUniformLocation(m_shaderProg, pUniformName);
 
-    if (Location == 0xFFFFFFFF)
-    {
+    if (Location == INVALID_OGL_VALUE) {
         fprintf(stderr, "Warning! Unable to get the location of uniform '%s'\n", pUniformName);
     }
 

@@ -16,8 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <stdlib.h>
 #include "math_3d.h"
 #define M_PI 3.14
+
 Vector3f Vector3f::Cross(const Vector3f& v) const
 {
     const float _x = y * v.z - z * v.y;
@@ -155,6 +157,7 @@ Quaternion Quaternion::Conjugate()
     return ret;
 }
 
+
 Quaternion operator*(const Quaternion& l, const Quaternion& r)
 {
     const float w = (l.w * r.w) - (l.x * r.x) - (l.y * r.y) - (l.z * r.z);
@@ -167,6 +170,7 @@ Quaternion operator*(const Quaternion& l, const Quaternion& r)
     return ret;
 }
 
+
 Quaternion operator*(const Quaternion& q, const Vector3f& v)
 {
     const float w = - (q.x * v.x) - (q.y * v.y) - (q.z * v.z);
@@ -177,4 +181,11 @@ Quaternion operator*(const Quaternion& q, const Vector3f& v)
     Quaternion ret(x, y, z, w);
 
     return ret;
+}
+
+
+float RandomFloat()
+{
+    float Max = RAND_MAX;
+    return ((float)rand() / Max);
 }

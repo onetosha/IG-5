@@ -33,7 +33,7 @@ public:
     virtual bool Init();
 
     void Enable();
-
+    
 protected:
 
     bool AddShader(GLenum ShaderType, const char* pShaderText);
@@ -43,10 +43,10 @@ protected:
     GLint GetUniformLocation(const char* pUniformName);
     
     GLint GetProgramParam(GLint param);
-
-private:
-
+    
     GLuint m_shaderProg;    
+    
+private:
 
     typedef std::list<GLuint> ShaderObjList;
     ShaderObjList m_shaderObjList;
