@@ -17,7 +17,6 @@
 */
 
 #include <iostream>
-
 #include "util.h"
 #include "texture.h"
 
@@ -41,7 +40,7 @@ bool Texture::Load()
 
     glGenTextures(1, &m_textureObj);
     glBindTexture(m_textureTarget, m_textureObj);
-    glTexImage2D(m_textureTarget, 0, GL_RGB, m_pImage->columns(), m_pImage->rows(), -0.5, GL_RGBA, GL_UNSIGNED_BYTE, m_blob.data());
+    glTexImage2D(m_textureTarget, 0, GL_RGBA, m_pImage->columns(), m_pImage->rows(), 0.0, GL_RGBA, GL_UNSIGNED_BYTE, m_blob.data());
     glTexParameterf(m_textureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(m_textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 

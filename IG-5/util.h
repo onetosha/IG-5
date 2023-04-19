@@ -43,6 +43,5 @@
 
 #define GLCheckError() (glGetError() == GL_NO_ERROR)
 
-
 #endif	/* UTIL_H */
 

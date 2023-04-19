@@ -16,9 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//#include <unistd.h>
+#/*include <unistd.h>*/
 #include <stdio.h>
-#include <string.h>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
@@ -58,6 +57,12 @@ static void IdleCB()
 }
 
 
+static void MouseCB(int Button, int State, int x, int y)
+{
+    s_pCallbacks->MouseCB(Button, State, x, y);
+}
+
+
 static void InitCallbacks()
 {
     glutDisplayFunc(RenderSceneCB);
@@ -65,6 +70,7 @@ static void InitCallbacks()
     glutSpecialFunc(SpecialKeyboardCB);
     glutPassiveMotionFunc(PassiveMouseCB);
     glutKeyboardFunc(KeyboardCB);
+    glutMouseFunc(MouseCB);
 }
 
 
@@ -89,7 +95,6 @@ bool GLUTBackendCreateWindow(unsigned int Width, unsigned int Height, unsigned i
         glutCreateWindow(pTitle);
     }
 
-    glewExperimental=GL_TRUE;
     // Must be done after glut is initialized!
     GLenum res = glewInit();
     if (res != GLEW_OK) {
@@ -97,8 +102,6 @@ bool GLUTBackendCreateWindow(unsigned int Width, unsigned int Height, unsigned i
         return false;
     }
 
-    glutSetCursor(GLUT_CURSOR_NONE);
-     
     return true;
 }
 
@@ -113,8 +116,8 @@ void GLUTBackendRun(ICallbacks* pCallbacks)
     glFrontFace(GL_CW);
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);
-    glEnable(GL_DEPTH_TEST);    
-        
+    glEnable(GL_DEPTH_TEST);
+
     s_pCallbacks = pCallbacks;
     InitCallbacks();
     glutMainLoop();
