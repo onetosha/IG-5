@@ -16,11 +16,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#/*include <unistd.h>*/
 #include <stdio.h>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
+#include "util.h"
 #include "glut_backend.h"
 
 // Points to the object implementing the ICallbacks interface which was delivered to
@@ -86,7 +86,7 @@ bool GLUTBackendCreateWindow(unsigned int Width, unsigned int Height, unsigned i
 {
     if (isFullScreen) {
         char ModeString[64] = { 0 };
-        snprintf(ModeString, sizeof(ModeString), "%dx%d@%d", Width, Height, bpp);
+        SNPRINTF(ModeString, sizeof(ModeString), "%dx%d@%d", Width, Height, bpp);
         glutGameModeString(ModeString);
         glutEnterGameMode();
     }
